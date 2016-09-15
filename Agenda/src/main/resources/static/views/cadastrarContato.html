@@ -1,0 +1,109 @@
+<div ng-controller="cadastrarContatoController">
+	<div class="page-header">
+		<h1>{{app}}</h1>
+	</div>
+	<form name="veiculoForm">
+		<div class="form-group row">
+			<label for="inputNome" class="col-sm-2 col-form-label">Nome:</label>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<span class="input-group-addon"> <span
+						class="glyphicon glyphicon-user"></span>
+					</span> <input class="form-control" ng-model="contato.noContato"
+						id="inputNome" placeholder="Nome" ng-required="true">
+
+				</div>
+			</div>
+
+		</div>
+		<div class="form-group row">
+			<label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<span class="input-group-addon" id="start-date"><span
+						class="glyphicon glyphicon-envelope"></span></span> <input type="email"
+						class="form-control" ng-model="contato.email" id="inputEmail"
+						placeholder="Email" ng-required="true">
+				</div>
+			</div>
+
+
+		</div>
+
+		<div class="form-group row">
+			<label for="inputEnd" class="col-sm-2 col-form-label">Endereço:</label>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<span class="input-group-addon" id="start-date"><span
+						class="glyphicon 	glyphicon-home"></span></span> <input
+						class="form-control" ng-model="contato.endereco" id="inputEnd"
+						placeholder="Endereço" ng-required="true">
+				</div>
+			</div>
+		</div>
+
+		<div class='form-horizontal '>
+			<fieldset>
+
+				<legend>Telefones</legend>
+				<div class="form-group row">
+					<div class="col-sm-4">
+						<button type="button" ng-click="addTelefone()"
+							class=" btn btn-primary">Adicionar outro</button>
+					</div>
+				</div>
+				<div ng-repeat="telefone in contato.listaTelefones">
+
+
+					<div class="form-group row">
+						<label for="inputEnd" class="col-sm-2 col-form-label">Tipo:</label>
+						<div class="col-sm-4">
+							<div class="input-group">
+								<span class="input-group-addon"> <span
+									class="glyphicon glyphicon-menu-hamburger"></span>
+								</span> <select ng-model="telefone.tipoTelefone" class="form-control"
+									ng-required="true">
+									<option value="" selected disabled>Selecione</option>
+									<option value="fixo">Fixo</option>
+									<option value="movel">Móvel</option>
+								</select>
+							</div>
+						</div>
+
+					</div>
+					<div class="form-group row">
+						<label for="inputEnd" class="col-sm-2 col-form-label">Numero:</label>
+						<div class="col-sm-8">
+							<div class="input-group">
+								<span class="input-group-addon"> <span
+									class="glyphicon glyphicon-earphone"></span>
+								</span> <input class="form-control phone"
+									ng-model="telefone.nuTelefone" id="inputTel" name="inputTel"
+									placeholder="Numero" mask="(999) 999-9999" ng-required="true">
+							</div>
+						</div>
+					</div>
+
+
+
+					<hr>
+				</div>
+			</fieldset>
+		</div>
+
+
+		<hr>
+		<div class="row">
+			<div class="col-xs-6 col-sm-4"></div>
+			<div class="col-xs-6 col-sm-4"></div>
+			<div class="clearfix visible-xs-block"></div>
+			<div class="col-xs-6 col-sm-4">
+				<button type="button" ng-click="criarContato(contato)"
+					ng-disabled="veiculoForm.$invalid" class=" btn btn-danger">Cadastrar</button>
+				<button type="button" class="btn btn-danger">Limpar</button>
+			</div>
+
+		</div>
+	</form>
+</div>
+

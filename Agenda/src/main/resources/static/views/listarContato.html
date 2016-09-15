@@ -1,0 +1,78 @@
+
+
+
+<div class="container">
+	<h3>Lista de Contatos</h3>
+	<hr>
+</div>
+
+
+<div class="container" ng-controller="listarContatoController">
+
+
+	<i class="fa fa-spin fa-refresh fa-5x" id="loader"></i>
+
+
+
+
+	<div class="container" id="contatosList">
+		<div class="row" ng-repeat-start="contato in contatos"
+			ng-click="detalhar(contato)" ng-class-odd="'alt'">
+
+			<div class="col-xs-1 col-md-1 text-center">
+				<img title="{{contato.noContato}}" src="/img/user.png"
+					class="img-thumbnail img-responsive img-circle">
+			</div>
+			<div class="col-xs-4 col-sm-3 cap">{{contato.noContato}}</div>
+			<div class="col-xs-4 col-sm-3 Strong">{{contato.email}}</div>
+			<div class="col-xs-3  col-sm-3 text-right">
+				<a href=""><i ng-hide="active==contato.noContato"
+					class="fa fa-plus fa-3x"></i><i ng-show="active==contato.noContato"
+					class="fa fa-minus fa-3x"></i></a>
+			</div>
+		</div>
+
+		<div class="row" ng-show="active==contato.noContato"
+			ng-class-odd="'alt'">
+			<fieldset>
+				<div class="col-xs-12">
+					<h2 class="cap">{{contato.noContato}}</h2>
+				</div>
+				<div class="col-md-3 col-xs-6 small">
+					<label>E-Mail</label> {{contato.noContato}}
+				</div>
+				<div class="col-md-3 col-xs-6 small">
+					<label>Endereço</label> {{contato.endereco}}
+				</div>
+
+				<div class="col-xs-12"></div>
+			</fieldset>
+		</div>
+
+
+		<div class="row" ng-repeat-end="" ng-show="active==contato.noContato"
+			ng-class-odd="'alt'">
+			<div class="col-xs-8">
+
+				<h4>Telefones</h4>
+				<table class="table table-striped">
+					<tr>
+						<th class="text-center ">Tipo</th>
+						<th class="text-center">Número</th>
+					</tr>
+					<tr ng-repeat="telefone in contato.listaTelefones">
+						<td class="text-center text-uppercase">{{telefone.tipoTelefone}}</td>
+						<td class="text-center">{{telefone.nuTelefone}}</td>
+					</tr>
+				</table>
+				<hr>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+</div>
