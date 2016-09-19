@@ -1,7 +1,16 @@
+
+
+
+
 <div ng-controller="cadastrarContatoController">
+
+
 	<div class="page-header">
 		<h1>{{app}}</h1>
 	</div>
+
+
+
 	<form name="veiculoForm">
 		<div class="form-group row">
 			<label for="inputNome" class="col-sm-2 col-form-label">Nome:</label>
@@ -26,8 +35,25 @@
 						placeholder="Email" ng-required="true">
 				</div>
 			</div>
+		</div>
 
 
+		<div class="form-group row">
+			<div>
+				<label for="inputEnd" class="col-sm-2 col-form-label">CEP:</label>
+				<div class="col-sm-4">
+					<div class="input-group">
+						<span class="input-group-addon" id="cep"><span
+							class="glyphicon glyphicon-home"></span></span> <input
+							class="form-control" ng-model="contato.cep" id="inputEnd"
+							placeholder="CEP" ng-required="true">
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<button type="button" ng-click="buscarCep(contato)"
+						class=" btn btn-primary">Buscar</button>
+				</div>
+			</div>
 		</div>
 
 		<div class="form-group row">
@@ -41,6 +67,14 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-sm-4 text-center">
+				<div id="map" class="embed-responsive embed-responsive-4by3"
+					style="max-height: 300px;" ng-show="mostraMapa">AEAEAE</div>
+			</div>
+		</div>
+
 
 		<div class='form-horizontal '>
 			<fieldset>

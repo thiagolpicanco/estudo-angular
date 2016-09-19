@@ -1,6 +1,7 @@
 var agenda = angular.module("agenda", [ 'ngRoute', 'ngMessages',
 		'angular-growl' ]);
 
+
 agenda.config(function($routeProvider) {
 	$routeProvider.when("/", {
 		templateUrl : "views/home.html",
@@ -16,7 +17,21 @@ agenda.config(function($routeProvider) {
 
 
 
-document.write('<scr'+'ipt type="text/javascript" src="controllers/homeController.js" ></scr'+'ipt>');
-document.write('<scr'+'ipt type="text/javascript" src="controllers/editarContatoController.js" ></scr'+'ipt>');
-document.write('<scr'+'ipt type="text/javascript" src="controllers/listarContatoController.js" ></scr'+'ipt>');
-document.write('<scr'+'ipt type="text/javascript" src="controllers/cadastrarContatoController.js" ></scr'+'ipt>');
+
+
+
+
+
+
+document
+		.write('<script type="text/javascript" src="controllers/homeController.js" ></scr'
+				+ 'ipt>');
+document
+		.write('<script type="text/javascript" src="controllers/editarContatoController.js" ></scr'
+				+ 'ipt>');
+document
+		.write('<script type="text/javascript" src="controllers/listarContatoController.js" ></scr'
+				+ 'ipt>');
+document
+		.write('<script type="text/javascript" src="controllers/cadastrarContatoController.js" ></scr'
+				+ 'ipt>');
