@@ -1,7 +1,6 @@
 var agenda = angular.module("agenda", [ 'ngRoute', 'ngMessages',
 		'angular-growl' ]);
 
-
 agenda.config(function($routeProvider) {
 	$routeProvider.when("/", {
 		templateUrl : "views/home.html",
@@ -21,7 +20,6 @@ agenda.config(function($routeProvider) {
 document
 		.write('<script type="text/javascript" src="directives/customDirectives.js" ></script>');
 
-<<<<<<< HEAD
 document
 		.write('<script type="text/javascript" src="controllers/homeController.js" ></script>');
 document
@@ -32,23 +30,3 @@ document
 		.write('<script type="text/javascript" src="controllers/cadastrarContatoController.js" ></script>');
 document
 		.write('<script type="text/javascript" src="controllers/minhasNotasController.js" ></script>');
-=======
-
-
-
-
-
-
-document
-		.write('<script type="text/javascript" src="controllers/homeController.js" ></scr'
-				+ 'ipt>');
-document
-		.write('<script type="text/javascript" src="controllers/editarContatoController.js" ></scr'
-				+ 'ipt>');
-document
-		.write('<script type="text/javascript" src="controllers/listarContatoController.js" ></scr'
-				+ 'ipt>');
-document
-		.write('<script type="text/javascript" src="controllers/cadastrarContatoController.js" ></scr'
-				+ 'ipt>');
->>>>>>> refs/remotes/origin/master
