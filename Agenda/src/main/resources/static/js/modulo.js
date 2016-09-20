@@ -22,7 +22,6 @@ agenda.config(function($routeProvider) {
 
 
 
-
 document
 		.write('<script type="text/javascript" src="controllers/homeController.js" ></scr'
 				+ 'ipt>');

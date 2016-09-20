@@ -2,7 +2,7 @@
 
 
 
-<div ng-controller="cadastrarContatoController">
+<div ng-controller="cadastrarContatoController" onload="initMap()">
 
 
 	<div class="page-header">
@@ -13,7 +13,7 @@
 
 	<form name="veiculoForm">
 		<div class="form-group row">
-			<label for="inputNome" class="col-sm-2 col-form-label">Nome:</label>
+			<label for="inputNome" class="col-sm-1 col-form-label">Nome:</label>
 			<div class="col-sm-8">
 				<div class="input-group">
 					<span class="input-group-addon"> <span
@@ -26,7 +26,7 @@
 
 		</div>
 		<div class="form-group row">
-			<label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
+			<label for="inputEmail" class="col-sm-1 col-form-label">Email:</label>
 			<div class="col-sm-8">
 				<div class="input-group">
 					<span class="input-group-addon" id="start-date"><span
@@ -40,11 +40,11 @@
 
 		<div class="form-group row">
 			<div>
-				<label for="inputEnd" class="col-sm-2 col-form-label">CEP:</label>
+				<label for="inputEnd" class="col-sm-1 col-form-label">CEP:</label>
 				<div class="col-sm-4">
 					<div class="input-group">
 						<span class="input-group-addon" id="cep"><span
-							class="glyphicon glyphicon-home"></span></span> <input
+							class="glyphicon glyphicon-inbox"></span></span> <input
 							class="form-control" ng-model="contato.cep" id="inputEnd"
 							placeholder="CEP" ng-required="true">
 					</div>
@@ -57,26 +57,80 @@
 		</div>
 
 		<div class="form-group row">
-			<label for="inputEnd" class="col-sm-2 col-form-label">Endereço:</label>
-			<div class="col-sm-8">
+
+			<label for="inputbairro" class="col-sm-1 col-form-label">Bairro</label>
+			<div class="col-sm-4">
 				<div class="input-group">
 					<span class="input-group-addon" id="start-date"><span
-						class="glyphicon 	glyphicon-home"></span></span> <input
-						class="form-control" ng-model="contato.endereco" id="inputEnd"
-						placeholder="Endereço" ng-required="true">
+						class="glyphicon glyphicon-flag"></span></span> <input type="text"
+						class="form-control" ng-blur="mudaMapa()"
+						ng-model="contato.bairro" id="inputbairro" placeholder="Bairro"
+						ng-required="true">
+				</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputCidade" class="col-sm-1 col-form-label">Cidade</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<span class="input-group-addon" id="start-date"><span
+						class="glyphicon glyphicon-tent"></span></span> <input type="text"
+						class="form-control" ng-blur="mudaMapa()"
+						ng-model="contato.cidade" id="inputCidade" placeholder="Cidade"
+						ng-required="true">
+				</div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputCidade" class="col-sm-1 col-form-label">UF</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<span class="input-group-addon" id="start-date"><span
+						class="glyphicon glyphicon-map-marker"></span></span> <input type="text"
+						class="form-control" ng-blur="mudaMapa()" ng-model="contato.uf"
+						id="inputCidade" placeholder="UF" ng-required="true">
 				</div>
 			</div>
 		</div>
 
-		<div class="row text-center">
-			<div class="col-sm-8 center">
-				<div id="map" class="embed-responsive embed-responsive-4by3"
-					style="max-height: 300px;" ng-show="mostraMapa"></div>
+
+
+		<div class="form-group row">
+			<label for="inputEnd" class="col-sm-1 col-form-label">Logradouro:</label>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<span class="input-group-addon" id="start-date"><span
+						class="glyphicon glyphicon-road"></span></span> <input
+						class="form-control" ng-model="contato.logradouro"
+						ng-blur="mudaMapa()" id="inputEnd"
+						placeholder="Exemplo: Rua Amaral Peixoto 43" ng-required="true">
+				</div>
 			</div>
 		</div>
 
+		<div class="form-group row">
+			<label for="inputEnd" class="col-sm-1 col-form-label">Obs:</label>
+			<div class="col-sm-8">
+				<div class="input-group">
+					<span class="input-group-addon" id="start-date"><span
+						class="glyphicon glyphicon-globe"></span></span> <input
+						class="form-control" ng-model="contato.complemento" id="inputEnd"
+						placeholder="Exemplo: Apartamento 402, Bloco 4" ng-required="true">
+				</div>
+			</div>
+		</div>
 
-		<div class='form-horizontal '>
+		<div class=" form-group row " ng-show="mostraMapa">
+			<div class="col-sm-9">
+				<legend>Localidade</legend>
+				<div class="col-sm-9 center">
+					<div id="map" class="embed-responsive embed-responsive-16by9"
+						ng-show="mostraMapa"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class='form-horizontal'>
 			<fieldset>
 
 				<legend>Telefones</legend>
@@ -90,7 +144,7 @@
 
 
 					<div class="form-group row">
-						<label for="inputEnd" class="col-sm-2 col-form-label">Tipo:</label>
+						<label for="inputEnd" class="col-sm-1 col-form-label">Tipo:</label>
 						<div class="col-sm-4">
 							<div class="input-group">
 								<span class="input-group-addon"> <span
@@ -106,7 +160,7 @@
 
 					</div>
 					<div class="form-group row">
-						<label for="inputEnd" class="col-sm-2 col-form-label">Numero:</label>
+						<label for="inputEnd" class="col-sm-1 col-form-label">Numero:</label>
 						<div class="col-sm-8">
 							<div class="input-group">
 								<span class="input-group-addon"> <span

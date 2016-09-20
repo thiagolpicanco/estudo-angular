@@ -4,34 +4,57 @@ agenda.controller("cadastrarContatoController", function listaProprietarios(
 
 	$scope.mostraMapa = false;
 
-	function initMap() {
-		var latitude;
-		var longigute;
+	$scope.mudaMapa = function initMap() {
+		var latLng;
+		var enderecoLink = '';
+		if ($scope.contato.logradouro != null) {
+			enderecoLink += $scope.contato.logradouro + ' ';
+		}
 
-		$.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='
-				+ $scope.contato.endereco + '&sensor=false', null, function(
-				data) {
-			var p = data.results[0].geometry.location
-			latitude = p.lat;
-			longigute = p.lng;
-		});
+		if ($scope.contato.bairro != null) {
+			enderecoLink += $scope.contato.bairro + ' ';
+		}
 
-		var myLatLng = {
-			lat : latitude,
-			lng : longigute
-		};
+		if ($scope.contato.cidade != null) {
+			enderecoLink += $scope.contato.cidade + ' ';
+		}
 
-		var map = new google.maps.Map(document.getElementById('map'), {
-			center : new google.maps.LatLng(0,0),
-			scrollwheel : false,
-			zoom : 14
-		});
+		if ($scope.contato.uf != null) {
+			enderecoLink += $scope.contato.uf + ' ';
+		}
 
-		var marker = new google.maps.Marker({
-			position : myLatLng,
-			map : map,
-			title : 'Hello World!'
-		});
+		$http.get(
+				'http://maps.googleapis.com/maps/api/geocode/json?address='
+						+ enderecoLink + '&sensor=false').success(
+				function(data) {
+
+					latLng = data.results[0].geometry.location
+					var map = new google.maps.Map(document
+							.getElementById('map'), {
+						center : new google.maps.LatLng(latLng),
+						scrollwheel : false,
+						zoom : 18,
+						mapTypeId : google.maps.MapTypeId.HYBRID
+					});
+
+					var icone = {
+						url : "img/1474396795_go-home.png", // url
+						scaledSize : new google.maps.Size(30, 30), // scaled
+						// size
+						origin : new google.maps.Point(0, 0), // origin
+						anchor : new google.maps.Point(0, 0)
+					// anchor
+					};
+
+					var marker = new google.maps.Marker({
+						position : latLng,
+						map : map,
+						title : 'Residencia',
+						icon : icone
+					});
+
+					$scope.mostraMapa = true;
+				});
 	}
 
 	function initContato() {
@@ -51,36 +74,31 @@ agenda.controller("cadastrarContatoController", function listaProprietarios(
 			var endereco = "";
 
 			if (data.logradouro) {
-				if (endereco.length > 0) {
-					endereco += ', ';
-				}
-				endereco += data.logradouro;
+				$scope.contato.logradouro = data.logradouro;
+			} else {
+				$scope.contato.logradouro = null;
 			}
 
 			if (data.bairro) {
-				if (endereco.length > 0) {
-					endereco += ', ';
-				}
-				endereco += data.bairro;
+				$scope.contato.bairro = data.bairro;
+			} else {
+				$scope.contato.bairro = null;
 			}
 
 			if (data.localidade) {
-				if (endereco.length > 0) {
-					endereco += ', ';
-				}
-				endereco += data.localidade;
+				$scope.contato.cidade = data.localidade;
+			} else {
+				$scope.contato.cidade = null;
 			}
 
 			if (data.uf) {
-				if (endereco.length > 0) {
-					endereco += ', ';
-					endereco += data.uf;
-				}
+				$scope.contato.uf = data.uf;
+			} else {
+				$scope.contato.uf = null;
 			}
 
-			$scope.contato.endereco = endereco;
-			initMap();
-			$scope.mostraMapa = true;
+			$scope.mudaMapa();
+
 		}).error(function(data) {
 			initMap();
 			alert(data);
