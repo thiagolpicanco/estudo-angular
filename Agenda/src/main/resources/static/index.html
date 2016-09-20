@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/estilo.css">
 
 <script src="js/dependencias/jquery-3.1.0.min.js" type="text/javascript"></script>
-<script src='js/dependencias/bootstrap.min.js' type="text/javascript"></script>
+<script src="js/dependencias/bootstrap.min.js" type="text/javascript"></script>
 <script src="js/dependencias/angular.js" type="text/javascript"></script>
 <script src="js/dependencias/angular-route.js"></script>
 <script src="js/dependencias/growl.js"></script>
@@ -19,6 +19,10 @@
 <script type="text/javascript"
 	src="js/dependencias/angular-messages.min.js"></script>
 <script type="text/javascript" src="js/modulo.js"></script>
+<script
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANXqtUQmkLWGeKPYpI1XAYdcq80TE0--E"
+	async defer></script>
+
 <script type="text/javascript" src="js/dependencias/jquery.mask.js"></script>
 <script type="text/javascript" src="js/dependencias/ngMask.js"></script>
 <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -45,13 +49,15 @@
 							<li><a href="#cadastraContato">Cadastrar</a></li>
 							<li><a href="#listaContato">Listar</a></li>
 						</ul></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#notas">Notas</a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#proprietario"><span
-							class="glyphicon glyphicon-user"></span> Cadastrar</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-							Entrar</a></li>
-				</ul>
+				<!-- 				<ul class="nav navbar-nav navbar-right"> -->
+				<!-- 					<li><a href="#proprietario"><span -->
+				<!-- 							class="glyphicon glyphicon-user"></span> Cadastrar</a></li> -->
+				<!-- 					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> -->
+				<!-- 							Entrar</a></li> -->
+				<!-- 				</ul> -->
 			</div>
 		</div>
 	</nav>
@@ -70,12 +76,9 @@
 			<div class="row">
 				<div ng-view></div>
 			</div>
-			<!-- div conteudo -->
 		</div>
-		<!-- div row container -->
 	</div>
-	<!-- div container -->
-	<!-- div wrapper -->
+
 	<footer style="margin-top: 3%;">
 		<!-- Aqui e a area do footer -->
 		<div class="container">

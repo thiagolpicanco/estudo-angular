@@ -11,12 +11,22 @@ agenda.config(function($routeProvider) {
 		templateUrl : "views/editarContato.html"
 	}).when("/listaContato", {
 		templateUrl : "views/listarContato.html"
+	}).when("/notas", {
+		templateUrl : "views/notas.html"
 	});
 });
 
+/* Diretivas customizadas */
+document
+		.write('<script type="text/javascript" src="directives/customDirectives.js" ></script>');
 
-
-document.write('<scr'+'ipt type="text/javascript" src="controllers/homeController.js" ></scr'+'ipt>');
-document.write('<scr'+'ipt type="text/javascript" src="controllers/editarContatoController.js" ></scr'+'ipt>');
-document.write('<scr'+'ipt type="text/javascript" src="controllers/listarContatoController.js" ></scr'+'ipt>');
-document.write('<scr'+'ipt type="text/javascript" src="controllers/cadastrarContatoController.js" ></scr'+'ipt>');
+document
+		.write('<script type="text/javascript" src="controllers/homeController.js" ></script>');
+document
+		.write('<script type="text/javascript" src="controllers/editarContatoController.js" ></script>');
+document
+		.write('<script type="text/javascript" src="controllers/listarContatoController.js" ></script>');
+document
+		.write('<script type="text/javascript" src="controllers/cadastrarContatoController.js" ></script>');
+document
+		.write('<script type="text/javascript" src="controllers/minhasNotasController.js" ></script>');

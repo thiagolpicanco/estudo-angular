@@ -1,0 +1,63 @@
+<div class="container">
+	<h3>Notas</h3>
+	<hr>
+</div>
+<div ng-controller="minhasNotasController">
+	<div class="container row pesquisar-nota-box nota">
+
+
+		<div class="input-group">
+			<input id="inputPesquisaNota" placeholer="Pesquisa"
+				ng-model="nota.tlNota" type="text" class="form-control"> <span
+				class="input-group-btn">
+				<button class="btn btn-default" type="button"
+					ng-click="pesquisarNotas(nota)">Pesquisar</button>
+			</span>
+		</div>
+	</div>
+
+	<div class="container row cadastrar-nota-box nota">
+		<div class="panel panel-default ">
+			<div class="panel-heading">
+				<input id="inputCriarNotaTitulo" placeholer="Título"
+					ng-model="nota.tlNota" type="text" class="form-control"
+					required="true" />
+			</div>
+			<div class="panel-body">
+				<textarea id="inputCriarNotaDesc" placeholer="Descrição"
+					ng-model="nota.deNota" type="text" class="form-control" rows="5">
+				</textarea>
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-default" type="button"
+					ng-click="criarNota(nota)">Concluir</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="container row listar-nota-box nota">
+		<div ng-repeat-start="nota in notas | orderBy: 'idNota' "
+			ng-class-odd="'alt'">
+			<div class="col-xs-4 ">
+				<div class="nota-unidade">
+
+					<div class="clearfix">
+						<div class="excluir-nota right btn" ng-click="deleteNota(nota)">
+							<i class="fa fa-times" aria-hidden="true"> </i>
+						</div>
+						<div class="nota-heading left" contenteditable="true" ng-
+							ng-model="nota.tlNota" ng-blur="editarNota(nota)">
+							{{nota.tlNota}}</div>
+
+					</div>
+
+					<div class="nota-body" onclick="$(this).find('input').focus();"
+						style="padding: 0;" contenteditable="true" ng-model="nota.deNota"
+						ng-blur="editarNota(nota)">{{nota.deNota}}</div>
+				</div>
+			</div>
+		</div>
+		<div ng-repeat-end=""></div>
+	</div>
+
+</div>

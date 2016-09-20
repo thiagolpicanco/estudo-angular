@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 @Entity
 public class Contato {
 	@Id
@@ -19,10 +20,20 @@ public class Contato {
 
 	private String email;
 
-	private String endereco;
+	private String logradouro;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "contato", cascade = { CascadeType.PERSIST,
-			CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE })
+	private String cidade;
+
+	private String complementoEndereco;
+
+	private String bairro;
+
+	private String uf;
+
+	private String cep;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "contato", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.REFRESH, CascadeType.REMOVE })
 	private List<Telefone> listaTelefones;
 
 	public Integer getIdContato() {
@@ -49,12 +60,44 @@ public class Contato {
 		this.email = email;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getComplementoEndereco() {
+		return complementoEndereco;
+	}
+
+	public void setComplementoEndereco(String complementoEndereco) {
+		this.complementoEndereco = complementoEndereco;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
 	public List<Telefone> getListaTelefones() {
@@ -65,6 +108,12 @@ public class Contato {
 		this.listaTelefones = listaTelefones;
 	}
 
-	
-	
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
 }
