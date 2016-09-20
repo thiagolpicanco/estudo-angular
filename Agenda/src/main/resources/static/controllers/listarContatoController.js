@@ -15,9 +15,27 @@ agenda.controller("listarContatoController", function listaContatos($scope,
 
 	function initMap(contato) {
 		var latLng;
+		var enderecoLink = '';
+
+		if (contato.logradouro != null) {
+			enderecoLink += contato.logradouro + ' ';
+		}
+
+		if (contato.bairro != null) {
+			enderecoLink += contato.bairro + ' ';
+		}
+
+		if (contato.cidade != null) {
+			enderecoLink += contato.cidade + ' ';
+		}
+
+		if (contato.uf != null) {
+			enderecoLink += contato.uf + ' ';
+		}
+
 		$http.get(
 				'http://maps.googleapis.com/maps/api/geocode/json?address='
-						+ contato.endereco + '&sensor=false').success(
+						+ enderecoLink + '&sensor=false').success(
 				function(data) {
 
 					if (data.results[0] != null) {
