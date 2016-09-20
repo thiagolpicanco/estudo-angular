@@ -22,7 +22,7 @@ agenda.controller("cadastrarContatoController", function listaProprietarios(
 		};
 
 		var map = new google.maps.Map(document.getElementById('map'), {
-			center : new google.maps.LatLng(-22.8944024, -43.1131263),
+			center : new google.maps.LatLng(0,0),
 			scrollwheel : false,
 			zoom : 14
 		});
@@ -47,14 +47,41 @@ agenda.controller("cadastrarContatoController", function listaProprietarios(
 		var link = 'https://viacep.com.br/ws/';
 		var complemento = '/json/';
 		var linkCompleto = link + contato.cep + complemento;
-		$http.get(linkCompleto).success(
-				function(data) {
-					$scope.contato.endereco = data.logradouro + ', '
-							+ data.bairro + ', ' + data.localidade + ', '
-							+ data.uf;
-					initMap();
-					$scope.mostraMapa = true;
-				}).error(function(data) {
+		$http.get(linkCompleto).success(function(data) {
+			var endereco = "";
+
+			if (data.logradouro) {
+				if (endereco.length > 0) {
+					endereco += ', ';
+				}
+				endereco += data.logradouro;
+			}
+
+			if (data.bairro) {
+				if (endereco.length > 0) {
+					endereco += ', ';
+				}
+				endereco += data.bairro;
+			}
+
+			if (data.localidade) {
+				if (endereco.length > 0) {
+					endereco += ', ';
+				}
+				endereco += data.localidade;
+			}
+
+			if (data.uf) {
+				if (endereco.length > 0) {
+					endereco += ', ';
+					endereco += data.uf;
+				}
+			}
+
+			$scope.contato.endereco = endereco;
+			initMap();
+			$scope.mostraMapa = true;
+		}).error(function(data) {
 			initMap();
 			alert(data);
 			console.log('Error: ' + data);

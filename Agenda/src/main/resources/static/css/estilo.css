@@ -9,6 +9,13 @@ img {
   top:60%;
 }
 
+.col-center-block {
+    float: none;
+    display: block;
+    margin: 0 auto;
+    /* margin-left: auto; margin-right: auto; */
+}
+
 .center {
      float: none;
      margin-left: auto;
