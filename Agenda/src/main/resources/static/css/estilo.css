@@ -10,12 +10,11 @@ img {
 }
 
 .col-center-block {
-    float: none;
-    display: block;
-    margin: 0 auto;
-    /* margin-left: auto; margin-right: auto; */
+	float: none;
+	display: block;
+	margin: 0 auto;
+	/* margin-left: auto; margin-right: auto; */
 }
-
 
 .center {
 	float: none;
@@ -231,10 +230,40 @@ body, html {
 	background: #c3c3c3;
 }
 
+.nota-heading {
+	height: 50px;
+}
+
+.nota-body {
+	height: 100px;
+}
+
 .nota-body:FOCUS, .nota-heading:FOCUS {
 	outline: none;
 }
 
 .borderless {
 	border: none;
+}
+
+.criar-nota {
+	width: 33%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nota-separador {
+	border-bottom: 1px solid #c3c3c3;
+}
+
+.nota-concluir {
+	text-align: center;
+	cursor: pointer;
+	border-radius: 5px;
+	
+}
+
+.nota-concluir:hover {
+	background: #c6c6c6;
+	color: white;
 }

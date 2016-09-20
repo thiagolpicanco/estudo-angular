@@ -33,21 +33,25 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 		});
 	};
 
-	$scope.criarNota = function(nota) {
-		var res = $http.post('/novaNota/', nota);
+	$scope.criarNota = function(criaNota) {
+		if(criaNota && criaNota.tlNota){
+			var res = $http.post('/novaNota/', criaNota);
 
-		res.success(function(data, status, headers, config) {
-			initContato();
-			alert("Nota cadastrada com sucesso!")
-			$scope.message = "Nota cadastrada com sucesso!";
-			$route.reload();
-		});
+			res.success(function(data, status, headers, config) {
+				console.log("Nota cadastrada com sucesso!")
+				$scope.message = "Nota cadastrada com sucesso!";
+				$route.reload();
+			});
+			
+			res.error(function(data, status, headers, config) {
+				console.log("failure message: " + JSON.stringify({
+					data : data
+				}));
+			});
+		} else {
+			$scope.message = "Campo título é obrigatório!";
+		}
 
-		res.error(function(data, status, headers, config) {
-			alert("failure message: " + JSON.stringify({
-				data : data
-			}));
-		});
 	};
 
 	/* PUT */

@@ -17,26 +17,22 @@
 	</div>
 
 	<div class="container row cadastrar-nota-box nota">
-		<div class="panel panel-default ">
-			<div class="panel-heading">
-				<input id="inputCriarNotaTitulo" placeholer="Título"
-					ng-model="nota.tlNota" type="text" class="form-control"
-					required="true" />
-			</div>
-			<div class="panel-body">
-				<textarea id="inputCriarNotaDesc" placeholer="Descrição"
-					ng-model="nota.deNota" type="text" class="form-control" rows="5">
-				</textarea>
-			</div>
-			<div class="panel-footer">
-				<button class="btn btn-default" type="button"
-					ng-click="criarNota(nota)">Concluir</button>
-			</div>
+
+		<div class="criar-nota nota-unidade">
+			<div id="inputCriarNotaTitulo" class="nota-heading"
+				contenteditable="true" ng-model="criaNota.tlNota"></div>
+			<div class="nota-separador"></div>
+			<div id="inputCriarNotaDesc" class="nota-body" contenteditable="true"
+				ng-model="criaNota.deNota"></div>
+
+			<div id="inputCriarConcluir" class="nota-footer"></div>
+			<div id="inputCriarConcluir" class="nota-concluir"
+				ng-click="criarNota(criaNota)">Concluir</div>
 		</div>
 	</div>
 
 	<div class="container row listar-nota-box nota">
-		<div ng-repeat-start="nota in notas | orderBy: 'idNota' "
+		<div ng-repeat="nota in notas | orderBy: 'idNota' "
 			ng-class-odd="'alt'">
 			<div class="col-xs-4 ">
 				<div class="nota-unidade">
@@ -50,14 +46,13 @@
 							{{nota.tlNota}}</div>
 
 					</div>
-
+					<div class="nota-separador"></div>
 					<div class="nota-body" onclick="$(this).find('input').focus();"
-						style="padding: 0;" contenteditable="true" ng-model="nota.deNota"
+						contenteditable="true" ng-model="nota.deNota"
 						ng-blur="editarNota(nota)">{{nota.deNota}}</div>
 				</div>
 			</div>
 		</div>
-		<div ng-repeat-end=""></div>
 	</div>
 
 </div>
