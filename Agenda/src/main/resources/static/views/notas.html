@@ -2,57 +2,155 @@
 	<h3>Notas</h3>
 	<hr>
 </div>
-<div ng-controller="minhasNotasController">
-	<div class="container row pesquisar-nota-box nota">
-
-
-		<div class="input-group">
-			<input id="inputPesquisaNota" placeholer="Pesquisa"
-				ng-model="nota.tlNota" type="text" class="form-control"> <span
-				class="input-group-btn">
-				<button class="btn btn-default" type="button"
-					ng-click="pesquisarNotas(nota)">Pesquisar</button>
-			</span>
+<div id="minhas-notas" ng-controller="minhasNotasController"
+	ng-click="limparMessages()">
+	<div class="col-xs-4"></div>
+	<div class="col-xs-8">
+		<span style='color: red'>{{messageErro}}</span> <span
+			style='color: blue'>{{messageSucesso}}</span>
+		<div class="container col-xs-12">
+			<div class="input-group">
+				<input id="inputPesquisaNota" placeholer="Pesquisa"
+					ng-model="nota.tlNota" type="text" class="form-control"> <span
+					class="input-group-btn">
+					<button class="btn btn-default" type="button"
+						ng-click="pesquisarNotas(nota)">Pesquisar</button>
+				</span>
+			</div>
 		</div>
-	</div>
 
-	<div class="container row cadastrar-nota-box nota">
+		<div class="container col-xs-12">
+			<div class="criar-nota nota-unidade"
+				ng-style="{'background-color' : criaNota.cor}">
+				<fieldset>
+					<legend id="inputCriarNotaTitulo" class="nota-heading"
+						contenteditable="true" ng-model="criaNota.tlNota"
+						ng-click="habilitarNovaNota()" ng-blur="blurNovaNota()"></legend>
 
-		<div class="criar-nota nota-unidade">
-			<div id="inputCriarNotaTitulo" class="nota-heading"
-				contenteditable="true" ng-model="criaNota.tlNota"></div>
-			<div class="nota-separador"></div>
-			<div id="inputCriarNotaDesc" class="nota-body" contenteditable="true"
-				ng-model="criaNota.deNota"></div>
+					<div id="criar-nota-group">
+						<div id="inputCriarBody" class="nota-body" contenteditable="true"
+							ng-model="criaNota.deNota" ng-focus="habilitarNovaNotaCorpo()"></div>
+						<div id="inputCriarFooter" class="nota-footer">
 
-			<div id="inputCriarConcluir" class="nota-footer"></div>
-			<div id="inputCriarConcluir" class="nota-concluir"
-				ng-click="criarNota(criaNota)">Concluir</div>
-		</div>
-	</div>
+							<!-- 						Paleta de cores -->
+							<a class="btn-nota-menu" ng-click="habilitarPaletaNota(criaNota)">
+								<i class="fa fa-google-wallet" aria-hidden="true"></i>
+							</a>
 
-	<div class="container row listar-nota-box nota">
-		<div ng-repeat="nota in notas | orderBy: 'idNota' "
-			ng-class-odd="'alt'">
-			<div class="col-xs-4 ">
-				<div class="nota-unidade">
-
-					<div class="clearfix">
-						<div class="excluir-nota right btn" ng-click="deleteNota(nota)">
-							<i class="fa fa-times" aria-hidden="true"> </i>
+							<!-- Paleta nota -->
+							<div class="nota-paleta nota-unidade"
+								ng-show="activePaletaNotaNovo">
+								<div class="col-xs-3">
+									<div class="red-nota paleta-cor" ng-click="novaCor(this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="yellow-nota paleta-cor" ng-click="novaCor(this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="green-nota paleta-cor" ng-click="novaCor(this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="blue-nota paleta-cor" ng-click="novaCor(this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="purple-nota paleta-cor" ng-click="novaCor(this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="pink-nota paleta-cor" ng-click="novaCor(this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="flesh-nota paleta-cor" ng-click="novaCorr(this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="white-nota paleta-cor" ng-click="novaCor(this)"></div>
+								</div>
+							</div>
 						</div>
-						<div class="nota-heading left" contenteditable="true" ng-
-							ng-model="nota.tlNota" ng-blur="editarNota(nota)">
-							{{nota.tlNota}}</div>
-
+						<div id="inputCriarConcluir" class="nota-concluir btn-danger"
+							ng-click="criarNota(criaNota)">Concluir</div>
 					</div>
-					<div class="nota-separador"></div>
-					<div class="nota-body" onclick="$(this).find('input').focus();"
-						contenteditable="true" ng-model="nota.deNota"
-						ng-blur="editarNota(nota)">{{nota.deNota}}</div>
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="container col-xs-12">
+			<div ng-repeat="nota in notas | orderBy: 'idNota' "
+				ng-class-odd="'alt'">
+				<div class="col-xs-4 ">
+					<div class="nota-unidade"
+						ng-style="{'background-color' : nota.cor}">
+						<fildset> <legend class="nota-heading"
+							contenteditable="true" ng-model="nota.tlNota"
+							ng-blur="editarNota(nota)"> {{nota.tlNota}}</legend>
+
+						<div class="nota-body" contenteditable="true"
+							ng-model="nota.deNota" ng-blur="editarNota(nota)">{{nota.deNota}}</div>
+						<div class="nota-footer">
+
+							<!-- 						Paleta de cores -->
+							<a class="btn-nota-menu" ng-click="habilitarPaletaNota(nota)">
+								<i class="fa fa-google-wallet" aria-hidden="true"></i>
+							</a>
+
+							<!-- 							Menu de opções da nota -->
+							<a class="right btn-nota-menu" ng-click="habilitarMenuNota(nota)">
+								<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+							</a>
+
+							<!-- Paleta nota -->
+							<div class="nota-paleta nota-unidade"
+								ng-show="activePaletaNota == nota.idNota">
+								<div class="col-xs-3">
+									<div class="red-nota paleta-cor"
+										ng-click="editaCor(nota, this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="yellow-nota paleta-cor"
+										ng-click="editaCor(nota,this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="green-nota paleta-cor"
+										ng-click="editaCor(nota,this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="blue-nota paleta-cor"
+										ng-click="editaCor(nota,this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="purple-nota paleta-cor"
+										ng-click="editaCor(nota,this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="pink-nota paleta-cor"
+										ng-click="editaCor(nota,this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="flesh-nota paleta-cor"
+										ng-click="editaCor(nota,this)"></div>
+								</div>
+								<div class="col-xs-3">
+									<div class="white-nota paleta-cor"
+										ng-click="editaCor(nota,this)"></div>
+								</div>
+							</div>
+
+							<!-- Menu Opcoes Nota -->
+							<div class="
+									nota-menu
+									nota-unidade"
+								ng-show="activeMenuNota == nota.idNota">
+								<div class="excluir-nota" ng-click="deleteNota(nota)">
+									<div class="col-xs-6">excluir</div>
+									<div class="col-xs-6">
+										<i class="fa fa-times" aria-hidden="true"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						</fildset>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>

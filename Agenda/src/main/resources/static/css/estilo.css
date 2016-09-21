@@ -216,10 +216,6 @@ body, html {
 	width: 100%;
 }
 
-.pesquisar-nota-box {
-	padding: 0 0 50px 0;
-}
-
 .nota-unidade {
 	box-shadow: 0px 0px 15px -5px;
 	margin: 0 5px 20px 5px;
@@ -228,14 +224,20 @@ body, html {
 
 .excluir-nota:HOVER {
 	background: #c3c3c3;
+	cursor: pointer;
 }
 
-.nota-heading {
-	height: 50px;
+.excluir-nota {
+	text-align: center;
+	border-radius: 5px;
 }
 
 .nota-body {
 	height: 100px;
+}
+
+.nota-heading {
+	
 }
 
 .nota-body:FOCUS, .nota-heading:FOCUS {
@@ -247,23 +249,112 @@ body, html {
 }
 
 .criar-nota {
-	width: 33%;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .nota-separador {
 	border-bottom: 1px solid #c3c3c3;
+	margin: 5px 0;
 }
 
 .nota-concluir {
 	text-align: center;
 	cursor: pointer;
 	border-radius: 5px;
-	
 }
 
-.nota-concluir:hover {
-	background: #c6c6c6;
-	color: white;
+
+
+#minhas-notas .container {
+	margin: 10px 0;
+}
+
+#inputCriarNotaTitulo {
+	color: #c3c3c3;
+}
+
+#criar-nota-group {
+	display: none;
+}
+
+.nota-menu {
+	position: absolute;
+	z-index: 1;
+	background: white;
+	width: 120px;
+	right: 0;
+}
+
+.nota-paleta {
+	position: absolute;
+	z-index: 1;
+	background: white;
+	width: 100px;
+	left: 0;
+}
+
+.btn-nota-menu {
+	width: 20px;
+	cursor: pointer;
+	text-align: center;
+	color: black;
+}
+
+.btn-nota-menu:HOVER {
+	border-radius: 5px;
+}
+
+.paleta-cor {
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.red-nota {
+	width: 10px;
+	height: 10px;
+	background-color: #ff9898;
+}
+
+.yellow-nota {
+	width: 10px;
+	height: 10px;
+	background-color: #f9ff98;
+}
+
+.green-nota {
+	width: 10px;
+	height: 10px;
+	background-color: #98ffa9;
+}
+
+.blue-nota {
+	width: 10px;
+	height: 10px;
+	background-color: #98deff;
+}
+
+.purple-nota {
+	width: 10px;
+	height: 10px;
+	background-color: #c498ff;
+}
+
+.pink-nota {
+	width: 10px;
+	height: 10px;
+	background-color: #ff98e4;
+}
+
+.flesh-nota {
+	width: 10px;
+	height: 10px;
+	background-color: #ffd698;
+}
+
+.white-nota {
+	width: 10px;
+	height: 10px;
+	background-color: white;
+	border: 1px solid black;
 }

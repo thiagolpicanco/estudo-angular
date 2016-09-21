@@ -27,7 +27,7 @@ public interface RepositorioNota extends PagingAndSortingRepository<Nota, Intege
 	 * @return listaNotas
 	 */
 
-	List<Nota> findByTlNotaLike(String tlNota);
+	List<Nota> findByTlNotaContainingIgnoreCase(String tlNota);
 
 	/**
 	 * 

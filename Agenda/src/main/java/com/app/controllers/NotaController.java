@@ -70,6 +70,10 @@ public class NotaController {
 			}
 		}
 
+		if (null == nota.getCor()) {
+			nota.setCor("white");
+		}
+
 		nota.setDtCriNota(new Date());
 
 		notaService.salvarNota(nota);
@@ -93,6 +97,8 @@ public class NotaController {
 				}
 			}
 		}
+
+		nota.setDtAltNota(new Date());
 
 		notaService.salvarNota(nota);
 

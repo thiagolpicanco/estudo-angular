@@ -26,11 +26,17 @@ public class Nota {
 	@Column(columnDefinition = "TEXT")
 	private String deNota;
 
+	@Column
 	private Date dtCriNota;
 
+	@Column
 	private Date dtAltNota;
+	
+	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer posicao;
 
-	@Column(columnDefinition = "VARCHAR(10)")
+	@Column(columnDefinition = "TEXT")
 	private String cor;
 
 	@Column
@@ -103,6 +109,14 @@ public class Nota {
 
 	public void setListaGrupos(List<Grupo> listaGrupos) {
 		this.listaGrupos = listaGrupos;
+	}
+
+	public Integer getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(Integer posicao) {
+		this.posicao = posicao;
 	}
 
 	@Override

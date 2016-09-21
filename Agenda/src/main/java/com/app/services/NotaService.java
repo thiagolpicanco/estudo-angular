@@ -23,7 +23,7 @@ public class NotaService {
 	}
 
 	public List<Nota> buscaPorTlNota(String tlNota) {
-		return repositorioNota.findByTlNotaLike(tlNota);
+		return repositorioNota.findByTlNotaContainingIgnoreCase(tlNota);
 	}
 
 	public List<Nota> buscaPorDeNota(String deNota) {

@@ -69,6 +69,7 @@ agenda.controller("listarContatoController", function listaContatos($scope,
 					}
 				});
 	}
+
 	$scope.detalhar = function(contato) {
 		$scope.mostraMapa = false;
 		if ($scope.active != contato.idContato) {
