@@ -10,3 +10,9 @@ Funcionalidade:
 
 
 *Integração com API Geocoding & GoogleMaps
+
+##Team: 
+-Thiago Picanço
+-Bruno Calmon
+
+
