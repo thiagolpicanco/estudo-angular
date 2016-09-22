@@ -2,7 +2,7 @@ agenda.controller("listarContatoController", function listaContatos($scope,
 		$http) {
 	$scope.app = "Home";
 
-	var map;
+	$scope.latLng = null;
 
 	function listarContatos() {
 		$http.get('/contatos').success(function(data) {
@@ -13,10 +13,9 @@ agenda.controller("listarContatoController", function listaContatos($scope,
 	}
 	;
 
-	function initMap(contato) {
-		var latLng;
+	$scope.initMap = function initMap(contato) {
 		var enderecoLink = '';
-
+		$scope.map = null;
 		if (contato.logradouro != null) {
 			enderecoLink += contato.logradouro + ' ';
 		}
@@ -40,31 +39,27 @@ agenda.controller("listarContatoController", function listaContatos($scope,
 
 					if (data.results[0] != null) {
 						$scope.mostraMapa = true;
-						latLng = data.results[0].geometry.location
+						$scope.latLng = data.results[0].geometry.location
 
-						if (map == null) {
+						$scope.map = new google.maps.Map(document
+								.getElementById(contato.idContato), {
+							center : new google.maps.LatLng($scope.latLng),
+							scrollwheel : false,
+							zoom : 15,
+						});
 
-							map = new google.maps.Map(document
-									.getElementById('map'), {
-								center : new google.maps.LatLng(latLng),
-								scrollwheel : false,
-								zoom : 14,
-							});
-						} else {
-							map.setCenter(LatLng);
-						}
-						var icone = {
+						$scope.icone = {
 							url : "img/1474396795_go-home.png", // url
 							scaledSize : new google.maps.Size(30, 30), // scaled
 							origin : new google.maps.Point(0, 0), // origin
 							anchor : new google.maps.Point(0, 0)
 						};
 
-						var marker = new google.maps.Marker({
-							position : latLng,
-							map : map,
+						$scope.marker = new google.maps.Marker({
+							position : $scope.latLng,
+							map : $scope.map,
 							title : 'Residencia',
-							icon : icone
+							icon : $scope.icone
 						});
 					}
 				});
@@ -74,9 +69,10 @@ agenda.controller("listarContatoController", function listaContatos($scope,
 		$scope.mostraMapa = false;
 		if ($scope.active != contato.idContato) {
 			$scope.active = contato.idContato;
-			initMap(contato);
+			$scope.initMap(contato);
 		} else {
 			$scope.active = null;
+			$scope.map = null;
 
 		}
 	};

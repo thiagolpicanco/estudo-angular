@@ -1,6 +1,4 @@
 
-
-
 <div class="container">
 	<h3>Lista de Contatos</h3>
 	<hr>
@@ -12,8 +10,6 @@
 	<div class="container" id="contatosList">
 		<div class="row" ng-repeat-start="contato in contatos"
 			ng-click="detalhar(contato)" ng-class-odd="'alt'">
-
-
 
 			<div class="col-xs-1 col-md-1 text-center">
 				<img title="{{contato.noContato}}" src="/img/user.png"
@@ -28,31 +24,62 @@
 			</div>
 		</div>
 
-		<div class="row" ng-show="active==contato.idContato"
-			ng-class-odd="'alt'">
+		<div ng-show="active==contato.idContato" ng-class-odd="'alt'">
 			<fieldset>
 				<div class="col-xs-12">
 					<h2 class="cap">{{contato.noContato}}</h2>
 				</div>
-				<div class="col-md-3 col-xs-6 small">
-					<label>E-Mail</label> {{contato.noContato}}
-				</div>
-				<div class="col-xs-12 small">
-					<label>Endereço</label> {{contato.endereco}}
+				<div class="row">
+
+					<hr>
+					<div class="col-md-3 col-xs-6 small">
+						<label>E-mail:</label> {{contato.email}}
+					</div>
+					<div class="col-md-3 col-xs-6 small">
+						<label>Bairro:</label> {{contato.bairro}}
+					</div>
+
+					<div class="col-md-3 col-xs-6 small">
+						<label>Cidade:</label> {{contato.cidade}}
+					</div>
+
 				</div>
 
-				<div class="col-xs-12"></div>
+				<div class="row">
+
+					<div class="col-md-3 col-xs-6 small">
+						<label>UF:</label> {{contato.uf}}
+					</div>
+
+					<div class="col-md-3 col-xs-6 small">
+						<label>Logradouro:</label> {{contato.logradouro}}
+					</div>
+
+					<div class="col-md-3 col-xs-6 small">
+						<label>Complemento: </label> {{contato.complementoEndereco}}
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-md-3 col-xs-6 small">
+						<label>CEP: </label> {{contato.cep}}
+					</div>
+
+					<div class="col-xs-12"></div>
 			</fieldset>
 		</div>
 
-		<div class="row" ng-show="mostraMapa && active==contato.idContato">
-			<div class="col-md-3 col-xs-6 small">
-				<div id="map" class="embed-responsive embed-responsive-4by3"
-					style="max-height: 300px;"></div>
+		<div class=" form-group row" ng-show="mostraMapa && active==contato.idContato">
+			<div class="col-sm-9" onload="initMap(contato);">
+				<div class="col-sm-9 center">
+					<div id="{{contato.idContato}}"
+						class="embed-responsive embed-responsive-16by9"></div>
+				</div>
 			</div>
 		</div>
-
-		<div class="row" ng-repeat-end="" ng-show="active==contato.idContato"
+		<div class="row" ng-repeat-end=" " ng-show="active==contato.idContato"
 			ng-class-odd="'alt'">
 			<div class="col-xs-8">
 
@@ -77,4 +104,5 @@
 
 
 
-</div>
+
+
