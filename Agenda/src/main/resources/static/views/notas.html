@@ -4,10 +4,59 @@
 </div>
 <div id="minhas-notas" ng-controller="minhasNotasController"
 	ng-click="limparMessages()">
-	<div class="col-xs-4"></div>
-	<div class="col-xs-8">
-		<span style='color: red'>{{messageErro}}</span> <span
-			style='color: blue'>{{messageSucesso}}</span>
+	<div class="col-xs-2">
+		<div id="menu-lateral">
+			<div id="menu-lateral-header" class="col-xs-12" align="left">
+				<div class="btn col-xs-12"
+					style="margin: 0; padding: 5px; text-align: left;">
+					<i class="fa fa-file-o" aria-hidden="true"
+						style="margin-right: 5px;"></i>Início
+				</div>
+				<div class="btn col-xs-12"
+					style="margin: 0; padding: 5px; text-align: left;">
+					<i class="fa fa-bookmark" aria-hidden="true"
+						style="margin-right: 5px;"></i>Arquivados
+				</div>
+			</div>
+
+			<legend>Categorias</legend>
+
+			<div id="lista-de-grupos" class="col-xs-12" align="left">
+
+
+				<div class="input-group col-xs-12">
+					<input type="text" class="form-control"
+						placeholder="Adicionar
+					categoria"
+						aria-describedby="basic-addon1" ng-model="criaGrupo.noGrupo">
+					<div id="btn-add-grupo" class="input-group-addon" id="basic-addon1"
+						ng-click="adicionarGrupo(criaGrupo)" style="cursor: pointer;">+</div>
+				</div>
+
+				<div class="btn col-xs-12"
+					style="margin: 0; padding: 5px; text-align: left;"
+					ng-repeat="grupo in grupos | orderBy: 'idGrupo' "
+					ng-class-odd="'alt'" ng-click="habilitarExcluirGrupo(grupo)">
+
+					<i class="fa fa-tag" aria-hidden="true" style="margin-right: 5px;"></i>{{grupo.noGrupo}}
+
+
+					<!-- Menu Excluir Grupo -->
+					<div class="excluir-grupo nota-menu nota-unidade"
+						ng-show="activeMenuGrupo == grupo.idGrupo">
+						<div class="excluir-nota" ng-click="deleteGrupo(grupo)">
+							<div class="col-xs-6">excluir</div>
+							<div class="col-xs-6">
+								<i class="fa fa-times" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-10">
 		<div class="container col-xs-12">
 			<div class="input-group">
 				<input id="inputPesquisaNota" placeholer="Pesquisa"
@@ -17,7 +66,7 @@
 						ng-click="pesquisarNotas(nota)">Pesquisar</button>
 				</span>
 			</div>
-		</div> 
+		</div>
 
 		<div class="container col-xs-12">
 			<div class="criar-nota nota-unidade"
@@ -35,6 +84,12 @@
 							<!-- 						Paleta de cores -->
 							<a class="btn-nota-menu" ng-click="habilitarPaletaNota(criaNota)">
 								<i class="fa fa-google-wallet" aria-hidden="true"></i>
+							</a>
+
+							<!-- 						Grupos -->
+							<a class="btn-nota-menu"
+								ng-click="habilitarListaDeGrupos(criaNota)"> <i
+								class="fa fa-tags" aria-hidden="true"></i>
 							</a>
 
 							<!-- Paleta nota -->
@@ -65,6 +120,20 @@
 									<div class="white-nota paleta-cor" ng-click="novaCor(this)"></div>
 								</div>
 							</div>
+
+							<!-- Lista de Grupos -->
+							<div class="nota-grupos nota-unidade" ng-show="activeListaGrupos">
+								<div id="listagem-nota" class="container">
+									<div class="btn btn-grupo"
+										style="margin: 0; padding: 5px; text-align: left;"
+										ng-repeat="grupo in grupos | orderBy: 'idGrupo' "
+										ng-class-odd="'alt'" ng-click="adicionarGrupoANota(grupo, nota, this)">
+
+										<i class="fa fa-tag" aria-hidden="true"
+											style="margin-right: 5px;"></i>{{grupo.noGrupo}}
+									</div>
+								</div>
+							</div>
 						</div>
 						<div id="inputCriarConcluir" class="nota-concluir btn-danger"
 							ng-click="criarNota(criaNota)">Concluir</div>
@@ -73,7 +142,7 @@
 			</div>
 		</div>
 
-		<div class="container col-xs-12">
+		<div id="listagem-nota" class="container col-xs-12">
 			<div ng-repeat="nota in notas | orderBy: 'idNota' "
 				ng-class-odd="'alt'">
 				<div class="col-xs-4 ">

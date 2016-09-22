@@ -217,9 +217,10 @@ body, html {
 }
 
 .nota-unidade {
-	box-shadow: 0px 0px 15px -5px;
+	box-shadow: -10px 10px 10px -10px;
 	margin: 0 5px 20px 5px;
 	padding: 10px;
+	border: 1px solid rgba(193, 193, 193, 0.5);
 }
 
 .excluir-nota:HOVER {
@@ -264,8 +265,6 @@ body, html {
 	border-radius: 5px;
 }
 
-
-
 #minhas-notas .container {
 	margin: 10px 0;
 }
@@ -294,6 +293,17 @@ body, html {
 	left: 0;
 }
 
+.nota-grupos {
+	position: absolute;
+	z-index: 1;
+	background: white;
+	left: 0;
+}
+
+.btn-grupo {
+	display: block;
+}
+
 .btn-nota-menu {
 	width: 20px;
 	cursor: pointer;
@@ -301,8 +311,30 @@ body, html {
 	color: black;
 }
 
+.excluir-grupo {
+	z-index: 999;
+}
+
 .btn-nota-menu:HOVER {
 	border-radius: 5px;
+}
+
+#listagem-nota {
+	overflow: auto;
+	max-height: 100px;
+	width: auto;
+}
+
+#menu-lateral {
+	height: 580px;
+	box-shadow: 10px 10px 10px -10px;
+	border: 1px solid rgba(193, 193, 193, 0.5);
+	overflow: auto;
+}
+
+#lista-de-grupos {
+	max-height: 300px;
+	overflow: auto;
 }
 
 .paleta-cor {

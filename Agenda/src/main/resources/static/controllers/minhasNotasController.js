@@ -16,7 +16,7 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 		$scope.activePaletaNota = null;
 		return $(obj).css( 'background-color' );
 	}
-
+	
 	/* GET */
 	/**
 	 * Inicializa todas as notas armazenadas.
@@ -40,6 +40,14 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 		});
 		}
 	};
+	
+	var listarGrupos = function() {
+		$http.get('/grupos').success(function(data) {
+			$rootScope.grupos = data;
+			$("#loader").hide();
+			$("#lista").show();
+		});
+	}
 
 	/* POST */
 	var iniciaNovaNota = function() {
@@ -49,17 +57,30 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 		$('#criar-nota-group').css('display', 'none');
 	};
 	
-	$scope.addGrupo = function() {
-		$scope.nota.listaGrupos.push({
-			idGrupo : null,
-			noGrupo : "",
-			deGrupo : ""
-		});
+	$scope.adicionarGrupo = function(criaGrupo) {
+
+		if($scope.criaGrupo.noGrupo){
+			
+			var res = $http.post('/novoGrupo/', criaGrupo);
+
+			res.success(function(data, status, headers, config) {
+				console.log("Grupo cadastrado com sucesso!")
+				$scope.messageSucesso = "Grupo cadastrado com sucesso!";
+				$route.reload();
+			});
+			
+			res.error(function(data, status, headers, config) {
+				console.log("failure message: " + JSON.stringify({
+					data : data
+				}));
+			});
+		}
 	};
 
 	$scope.novaCor = function($event) {
 		$scope.criaNota.cor = $scope.alteraCor(event);
 	}
+	
 	$scope.criarNota = function(criaNota) {
 		if($scope.criaNota.atvNota){
 			
@@ -76,10 +97,7 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 					data : data
 				}));
 			});
-		} else {
-			$scope.messageErro = "Campo título é obrigatório!";
 		}
-
 	};
 	
 	$scope.habilitarNovaNota= function() {
@@ -118,6 +136,16 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 			}));
 		});
 	};
+
+	$scope.habilitarExcluirGrupo = function(grupo) {
+		if(grupo.idGrupo) {
+			if ($scope.activeMenuGrupo != grupo.idGrupo) {
+				$scope.activeMenuGrupo = grupo.idGrupo;
+			} else {
+				$scope.activeMenuGrupo = '';
+			}
+		}
+	} 
 	
 	$scope.habilitarPaletaNota = function(nota) {
 		if(nota.idNota) {
@@ -131,6 +159,22 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 				$scope.activePaletaNotaNovo = false;
 			} else {
 				$scope.activePaletaNotaNovo = true;
+			}
+		}
+	}
+	
+	$scope.habilitarListaDeGrupos = function(nota) {
+		if(nota.idNota) {
+			if ($scope.activeListaGrupos != nota.idNota) {
+				$scope.activeListaGrupos = nota.idNota;
+			} else {
+				$scope.activeListaGrupos = '';
+			}
+		}else {
+			if($scope.activeListaGrupos) { 
+				$scope.activeListaGrupos = false;
+			} else {
+				$scope.activeListaGrupos = true;
 			}
 		}
 	}
@@ -164,12 +208,29 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 			}));
 		});
 		
+	}
 	
+	$scope.deleteGrupo = function(grupo) {
+		var res = $http.delete('/deleteGrupo/' + grupo.idGrupo);
+	
+		res.success(function(data, status, headers, config) {
+			console.log("Grupo removido com sucesso!")
+			$scope.messageSucesso = "Grupo removido com sucesso!";
+			$route.reload();
+		});
+	
+		res.error(function(data, status, headers, config) {
+			console.log("failure message: " + JSON.stringify({
+				data : data
+			}));
+		});
+
 	}
 	
 	/* Inicializacao base */
 	function initNota() {
 		listarNotas();
+		listarGrupos();
 		$scope.nota = {};
 		iniciaNovaNota();
 		$scope.display = false;

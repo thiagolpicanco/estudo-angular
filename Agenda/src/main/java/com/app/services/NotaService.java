@@ -1,5 +1,6 @@
 package com.app.services;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,9 @@ public class NotaService {
 		return repositorioNota.exists(id);
 	}
 
-	public void salvarNota(Nota nota) {
-		repositorioNota.save(nota);
+	public void salvarNota(Nota... nota) {
+		List<Nota> listaNotas = Arrays.asList(nota);
+		repositorioNota.save(listaNotas);
 	}
 
 	public void salvarLista(List<Nota> listaNotas) {

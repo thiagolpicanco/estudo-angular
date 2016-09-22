@@ -33,4 +33,8 @@ public class GrupoService {
 	public void salvarLista(List<Grupo> listaGrupos) {
 		repositorioGrupo.save(listaGrupos);
 	}
+	
+	public void deletarGrupo(Integer grupoId) {
+		repositorioGrupo.delete(grupoId);
+	}
 }
