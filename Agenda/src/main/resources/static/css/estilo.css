@@ -267,6 +267,7 @@ body, html {
 
 #minhas-notas .container {
 	margin: 10px 0;
+	width: 100%;
 }
 
 #inputCriarNotaTitulo {
@@ -321,8 +322,9 @@ body, html {
 
 #listagem-nota {
 	overflow: auto;
-	max-height: 100px;
-	width: auto;
+	margin: 0;
+	padding: 0;
+	max-height: 410px;
 }
 
 #menu-lateral {
@@ -333,7 +335,7 @@ body, html {
 }
 
 #lista-de-grupos {
-	max-height: 300px;
+	height: 300px;
 	overflow: auto;
 }
 

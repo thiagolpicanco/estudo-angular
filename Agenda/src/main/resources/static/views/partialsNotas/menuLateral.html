@@ -1,0 +1,50 @@
+
+<div id="menu-lateral">
+	<div id="menu-lateral-header" class="col-xs-12" align="left">
+		<div class="btn col-xs-12"
+			style="margin: 0; padding: 5px; text-align: left;">
+			<i class="fa fa-file-o" aria-hidden="true" style="margin-right: 5px;"></i>Início
+		</div>
+		<div class="btn col-xs-12"
+			style="margin: 0; padding: 5px; text-align: left;">
+			<i class="fa fa-bookmark" aria-hidden="true"
+				style="margin-right: 5px;"></i>Arquivados
+		</div>
+	</div>
+
+	<legend>Categorias</legend>
+
+	<div id="lista-de-grupos" class="col-xs-12" align="left">
+
+
+		<div class="input-group col-xs-12">
+			<input type="text" class="form-control"
+				placeholder="Adicionar
+					categoria"
+				aria-describedby="basic-addon1" ng-model="grupo.noGrupo">
+			<div id="btn-add-grupo" class="input-group-addon" id="basic-addon1"
+				ng-click="adicionarGrupo(grupo)" style="cursor: pointer;">+</div>
+		</div>
+
+		<div class="btn col-xs-12"
+			style="margin: 0; padding: 5px; text-align: left;"
+			ng-repeat="grupo in grupos | orderBy: 'idGrupo' "
+			ng-class-odd="'alt'" ng-click="habilitarExcluirGrupo(grupo)">
+
+			<i class="fa fa-tag" aria-hidden="true" style="margin-right: 5px;"></i>{{grupo.noGrupo}}
+
+
+			<!-- Menu Excluir Grupo -->
+			<div class="excluir-grupo nota-menu nota-unidade"
+				ng-show="activeMenuGrupo == grupo.idGrupo">
+				<div class="excluir-nota" ng-click="deleteGrupo(grupo)">
+					<div class="col-xs-6">excluir</div>
+					<div class="col-xs-6">
+						<i class="fa fa-times" aria-hidden="true"></i>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

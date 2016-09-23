@@ -5,6 +5,12 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 	$rootScope.app = $scope.app;
 	
 	/* HTML */
+	var iniciaNovaNota = function() {
+		$scope.nota = { tlNota:'Dê um título para este lembrete', deNota:'Escreva algo para se lembrar', atvNota:false};
+		$('#inputCriarNotaTitulo').css('color', '#c3c3c3');
+		$('#criar-nota-group').css('display', 'none');
+	};
+	
 	$scope.limparMessages = function() {
 			$scope.messageSucesso = "";
 			$scope.messageErro = "";
@@ -29,11 +35,11 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 		});
 	};
 
-	$scope.pesquisarNotas = function(nota) {
-		if (nota.tlNota == '') {
+	$scope.pesquisarNotas = function(pesquisa) {
+		if (pesquisa == '') {
 			listarNotas();
 		}else{
-		$http.get('/nota/' + nota.tlNota).success(function(data) {
+		$http.get('/nota/' + pesquisa).success(function(data) {
 			$rootScope.notas = data;
 			$("#loader").hide();
 			$(".nota").show();
@@ -50,18 +56,12 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 	}
 
 	/* POST */
-	var iniciaNovaNota = function() {
-		$scope.criaNota = { tlNota:'Dê um título para este lembrete', deNota:'Escreva algo para se lembrar', atvNota:false };
-		$('#inputCriarNotaTitulo').css('color', '#c3c3c3');
-		$('#inputCriarBody').css('color', '#c3c3c3');
-		$('#criar-nota-group').css('display', 'none');
-	};
 	
-	$scope.adicionarGrupo = function(criaGrupo) {
+	$scope.adicionarGrupo = function(grupo) {
 
-		if($scope.criaGrupo.noGrupo){
+		if(grupo.noGrupo){
 			
-			var res = $http.post('/novoGrupo/', criaGrupo);
+			var res = $http.post('/novoGrupo/', grupo);
 
 			res.success(function(data, status, headers, config) {
 				console.log("Grupo cadastrado com sucesso!")
@@ -78,13 +78,16 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 	};
 
 	$scope.novaCor = function($event) {
-		$scope.criaNota.cor = $scope.alteraCor(event);
+		$scope.nota.cor = $scope.alteraCor(event);
 	}
 	
-	$scope.criarNota = function(criaNota) {
-		if($scope.criaNota.atvNota){
+	$scope.criarNota = function(nota) {
+		if(nota.atvNota){
+			if (!nota.atvDeNota) { 
+				nota.deNota = null 
+			}
 			
-			var res = $http.post('/novaNota/', criaNota);
+			var res = $http.post('/novaNota/', nota);
 
 			res.success(function(data, status, headers, config) {
 				console.log("Nota cadastrada com sucesso!")
@@ -102,26 +105,46 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 	
 	$scope.habilitarNovaNota= function() {
 		$scope.message = '';
-		$scope.criaNota.tlNota = '';
-		$scope.criaNota.atvNota = true;
+		$scope.nota.tlNota = '';
+		$scope.nota.atvNota = true;
 		$('#inputCriarNotaTitulo').css('color', 'black');
+		$('#inputCriarBody').css('color', '#c3c3c3');
 		$('#criar-nota-group').css('display', 'initial');
 	}
 	
 	$scope.habilitarNovaNotaCorpo = function() {
-		$scope.criaNota.deNota = '';
-		$scope.criaNota.atvDeNota = true;
+		$scope.nota.deNota = '';
+		$scope.nota.atvDeNota = true;
 		$('#inputCriarBody').css('color', 'black');
 	}
 	
 	$scope.blurNovaNota= function() {
-		if($scope.criaNota.tlNota == ''){
+		if($scope.nota.tlNota == ''){
 			iniciaNovaNota();
+			$scope.nota.atvDeNota = false;
 			$scope.messageErro = "Campo título é obrigatório!";
 		}
 	}
 	
 	/* PUT */
+	$scope.adicionarGrupoANota = function(grupo, $event) {
+		var existe = false;
+		var obj = event.target;
+		if(!$scope.nota.listaGrupos){
+			$scope.nota.listaGrupos = [];
+		}
+		existe = $scope.nota.listaGrupos.indexOf(grupo) != -1;
+		
+		if (grupo.idGrupo && !existe){
+			$scope.nota.listaGrupos.push(grupo);
+			$(obj).find('i').css({'color': '#c9302c'});
+		} else {
+			var index = $scope.nota.listaGrupos.indexOf(grupo);
+			$scope.nota.listaGrupos.splice(index,1);
+			$(obj).find('i').css({'color': ''});
+		}
+	};
+	
 	$scope.editarNota = function(nota) {
 		var res = $http.put('/editarNota/', nota);
 
@@ -233,7 +256,6 @@ agenda.controller('minhasNotasController', function($scope, $rootScope, $http,
 		listarGrupos();
 		$scope.nota = {};
 		iniciaNovaNota();
-		$scope.display = false;
 	}
 
 	$scope.init = initNota();

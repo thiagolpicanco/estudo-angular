@@ -67,6 +67,7 @@ public class NotaController {
 		if (null != nota.getListaGrupos() && !nota.getListaGrupos().isEmpty()) {
 			for (Grupo grupo : nota.getListaGrupos()) {
 				if (grupoService.grupoExistente(grupo.getIdGrupo())) {
+					grupo.setListaNotas(new ArrayList<Nota>());
 					grupo.getListaNotas().add(nota);
 				}
 			}

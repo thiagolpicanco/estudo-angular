@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Grupo {
 	@Id
@@ -25,6 +27,7 @@ public class Grupo {
 	@Column
 	private Date dtAltGrupo;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "listaGrupos")
 	private List<Nota> listaNotas;
 
@@ -44,20 +47,20 @@ public class Grupo {
 		this.noGrupo = noGrupo;
 	}
 
-	public Date getDtCriacaoGrupo() {
+	public Date getDtCriGrupo() {
 		return dtCriGrupo;
 	}
 
-	public void setDtCriacaoGrupo(Date dtCriacaoGrupo) {
-		this.dtCriGrupo = dtCriacaoGrupo;
+	public void setDtCriGrupo(Date dtCriGrupo) {
+		this.dtCriGrupo = dtCriGrupo;
 	}
 
-	public Date getDtaAlteracaoGrupo() {
+	public Date getDtAltGrupo() {
 		return dtAltGrupo;
 	}
 
-	public void setDtaAlteracaoGrupo(Date dtaAlteracaoGrupo) {
-		this.dtAltGrupo = dtaAlteracaoGrupo;
+	public void setDtAltGrupo(Date dtAltGrupo) {
+		this.dtAltGrupo = dtAltGrupo;
 	}
 
 	public List<Nota> getListaNotas() {
@@ -72,8 +75,8 @@ public class Grupo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dtCriGrupo == null) ? 0 : dtCriGrupo.hashCode());
 		result = prime * result + ((dtAltGrupo == null) ? 0 : dtAltGrupo.hashCode());
+		result = prime * result + ((dtCriGrupo == null) ? 0 : dtCriGrupo.hashCode());
 		result = prime * result + ((idGrupo == null) ? 0 : idGrupo.hashCode());
 		result = prime * result + ((listaNotas == null) ? 0 : listaNotas.hashCode());
 		result = prime * result + ((noGrupo == null) ? 0 : noGrupo.hashCode());
@@ -89,15 +92,15 @@ public class Grupo {
 		if (!(obj instanceof Grupo))
 			return false;
 		Grupo other = (Grupo) obj;
-		if (dtCriGrupo == null) {
-			if (other.dtCriGrupo != null)
-				return false;
-		} else if (!dtCriGrupo.equals(other.dtCriGrupo))
-			return false;
 		if (dtAltGrupo == null) {
 			if (other.dtAltGrupo != null)
 				return false;
 		} else if (!dtAltGrupo.equals(other.dtAltGrupo))
+			return false;
+		if (dtCriGrupo == null) {
+			if (other.dtCriGrupo != null)
+				return false;
+		} else if (!dtCriGrupo.equals(other.dtCriGrupo))
 			return false;
 		if (idGrupo == null) {
 			if (other.idGrupo != null)
@@ -115,11 +118,5 @@ public class Grupo {
 		} else if (!noGrupo.equals(other.noGrupo))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Grupo [idGrupo=" + idGrupo + ", noGrupo=" + noGrupo + ", dtCriacaoGrupo=" + dtCriGrupo
-				+ ", dtaAlteracaoGrupo=" + dtAltGrupo + ", listaNotas=" + listaNotas + "]";
 	}
 }

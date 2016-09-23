@@ -1,0 +1,67 @@
+<div ng-repeat="nota in notas | orderBy: 'idNota' " ng-class-odd="'alt'">
+	<div class="col-xs-4 ">
+		<div class="nota-unidade" ng-style="{'background-color' : nota.cor}">
+			<fildset> <legend class="nota-heading"
+				contenteditable="true" ng-model="nota.tlNota"
+				ng-blur="editarNota(nota)"> {{nota.tlNota}}</legend>
+
+			<div class="nota-body" contenteditable="true" ng-model="nota.deNota"
+				ng-blur="editarNota(nota)">{{nota.deNota}}</div>
+			<div class="nota-footer">
+
+				<!-- 						Paleta de cores -->
+				<a class="btn-nota-menu" ng-click="habilitarPaletaNota(nota)"> <i
+					class="fa fa-google-wallet" aria-hidden="true"></i>
+				</a>
+
+				<!-- 							Menu de opções da nota -->
+				<a class="right btn-nota-menu" ng-click="habilitarMenuNota(nota)">
+					<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+				</a>
+
+				<!-- Paleta nota -->
+				<div class="nota-paleta nota-unidade"
+					ng-show="activePaletaNota == nota.idNota">
+					<div class="col-xs-3">
+						<div class="red-nota paleta-cor" ng-click="editaCor(nota, this)"></div>
+					</div>
+					<div class="col-xs-3">
+						<div class="yellow-nota paleta-cor" ng-click="editaCor(nota,this)"></div>
+					</div>
+					<div class="col-xs-3">
+						<div class="green-nota paleta-cor" ng-click="editaCor(nota,this)"></div>
+					</div>
+					<div class="col-xs-3">
+						<div class="blue-nota paleta-cor" ng-click="editaCor(nota,this)"></div>
+					</div>
+					<div class="col-xs-3">
+						<div class="purple-nota paleta-cor" ng-click="editaCor(nota,this)"></div>
+					</div>
+					<div class="col-xs-3">
+						<div class="pink-nota paleta-cor" ng-click="editaCor(nota,this)"></div>
+					</div>
+					<div class="col-xs-3">
+						<div class="flesh-nota paleta-cor" ng-click="editaCor(nota,this)"></div>
+					</div>
+					<div class="col-xs-3">
+						<div class="white-nota paleta-cor" ng-click="editaCor(nota,this)"></div>
+					</div>
+				</div>
+
+				<!-- Menu Opcoes Nota -->
+				<div class="
+									nota-menu
+									nota-unidade"
+					ng-show="activeMenuNota == nota.idNota">
+					<div class="excluir-nota" ng-click="deleteNota(nota)">
+						<div class="col-xs-6">excluir</div>
+						<div class="col-xs-6">
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+			</fildset>
+		</div>
+	</div>
+</div>

@@ -57,7 +57,7 @@ public class GrupoController {
 		}
 
 
-		grupo.setDtCriacaoGrupo(new Date());
+		grupo.setDtCriGrupo(new Date());
 
 		grupoService.salvarGrupo(grupo);
 
