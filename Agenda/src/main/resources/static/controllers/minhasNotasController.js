@@ -45,12 +45,13 @@ agenda.controller('minhasNotasController', function(NOTA, $scope, $rootScope, $h
 		if (nota === undefined) {
 			nota = $scope.nota;
 			$scope.nota = $scope.adicionarGrupoANota(grupo, element, nota);
-
 			// Editar
 		} else {
 			nota = $scope.adicionarGrupoANota(grupo, element, nota);
 			$scope.editarNota(nota);
 		}
+		$scope.activeListaGrupos = '';
+		$scope.activeListaGruposNovos = false;
 	}
 
 	$scope.adicionarGrupoANota = function(grupo, element, nota) {
@@ -153,16 +154,6 @@ agenda.controller('minhasNotasController', function(NOTA, $scope, $rootScope, $h
 			$scope.nota.atvDeNota = true;
 		}
 	};
-
-//	$scope.habilitarExcluirGrupo = function(grupo) {
-//		if (grupo.idGrupo) {
-//			if ($scope.activeMenuGrupo != grupo.idGrupo) {
-//				$scope.activeMenuGrupo = grupo.idGrupo;
-//			} else {
-//				$scope.activeMenuGrupo = '';
-//			}
-//		}
-//	}
 
 	$scope.habilitarPaletaNota = function(nota) {
 		if (nota.idNota) {
@@ -274,6 +265,8 @@ agenda.controller('minhasNotasController', function(NOTA, $scope, $rootScope, $h
 				console.log("Nota cadastrada com sucesso!")
 				$scope.messageSucesso = "Nota cadastrada com sucesso!";
 				$('#criar-nota-modal-group').modal('hide');
+				listarNotas();
+				$('#criar-nota-modal').css('display', 'block');
 			});
 
 			res.error(function(data, status, headers, config) {
@@ -282,7 +275,7 @@ agenda.controller('minhasNotasController', function(NOTA, $scope, $rootScope, $h
 				}));
 			});
 		}
-		$route.reload();
+		
 	};
 
 	/* PUT */

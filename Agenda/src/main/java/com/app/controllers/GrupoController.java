@@ -80,6 +80,13 @@ public class GrupoController {
 		if (!grupoService.grupoExistente(grupoId)) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
+		
+		Grupo grupo = grupoService.buscaPorId(grupoId);
+		
+		for (Nota nota : grupo.getListaNotas()) {
+			nota.getListaGrupos().remove(grupo);
+		}
+		
 		grupoService.deletarGrupo(grupoId);
 
 		HttpHeaders headers = new HttpHeaders();
