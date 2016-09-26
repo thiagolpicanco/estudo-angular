@@ -1,7 +1,6 @@
 
 package com.app.controllers;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +32,16 @@ public class GrupoController {
 	NotaService notaService;
 	@Autowired
 	GrupoService grupoService;
+	
+	
+	@RequestMapping(value = "/grupo/{id}", produces = "application/JSON")
+	public ResponseEntity<List<Nota>> getNotaByGrupoById(@PathVariable("id") Integer id) {
+		Grupo grupo = grupoService.buscaPorId(id);
+		if (null != grupo) {
+			return new ResponseEntity<>(grupo.getListaNotas(), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 	
 	/**
 	 * 

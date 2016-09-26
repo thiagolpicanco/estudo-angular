@@ -19,6 +19,11 @@
 					<i class="fa fa-ellipsis-v" aria-hidden="true"></i>
 				</a>
 
+				<!-- 						Grupos -->
+				<a class="btn-nota-menu" ng-click="habilitarListaDeGrupos(nota)">
+					<i class="fa fa-tags" aria-hidden="true" ng-style="{'color' : possuiListaDeGrupo(nota)}"></i>
+				</a>
+
 				<!-- Paleta nota -->
 				<div class="nota-paleta nota-unidade"
 					ng-show="activePaletaNota == nota.idNota">
@@ -48,10 +53,23 @@
 					</div>
 				</div>
 
+				<!-- Lista de Grupos -->
+				<div class="nota-grupos nota-unidade"
+					ng-show="activeListaGrupos == nota.idNota">
+
+					<div class="btn btn-grupo"
+						style="margin: 0; padding: 5px; text-align: left;"
+						ng-repeat="grupo in grupos | orderBy: 'idGrupo' "
+						ng-class-odd="'alt'"
+						ng-click="manipularGrupoNota(grupo, this, nota)">
+
+						<i class="fa fa-tag" aria-hidden="true" style="margin-right: 5px;"
+							ng-style="{'color' : possuiGrupo(nota, grupo)}"></i>{{grupo.noGrupo}}
+					</div>
+				</div>
+
 				<!-- Menu Opcoes Nota -->
-				<div class="
-									nota-menu
-									nota-unidade"
+				<div class="nota-menu nota-unidade"
 					ng-show="activeMenuNota == nota.idNota">
 					<div class="excluir-nota" ng-click="deleteNota(nota)">
 						<div class="col-xs-6">excluir</div>

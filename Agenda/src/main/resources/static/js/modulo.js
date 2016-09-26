@@ -16,6 +16,11 @@ agenda.config(function($routeProvider) {
 	});
 });
 
+agenda.constant("NOTA", {
+    "tlNota": "Dê um título para este lembrete",
+    "deNota": "Escreva algo para se lembrar",
+})
+
 /* Diretivas customizadas */
 document
 		.write('<script type="text/javascript" src="directives/customDirectives.js" ></script>');

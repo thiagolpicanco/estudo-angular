@@ -123,14 +123,8 @@ public class Nota {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cor == null) ? 0 : cor.hashCode());
-		result = prime * result + ((deNota == null) ? 0 : deNota.hashCode());
-		result = prime * result + ((dtAltNota == null) ? 0 : dtAltNota.hashCode());
 		result = prime * result + ((dtCriNota == null) ? 0 : dtCriNota.hashCode());
 		result = prime * result + ((idNota == null) ? 0 : idNota.hashCode());
-		result = prime * result + Arrays.hashCode(imagem);
-		result = prime * result + ((listaGrupos == null) ? 0 : listaGrupos.hashCode());
-		result = prime * result + ((tlNota == null) ? 0 : tlNota.hashCode());
 		return result;
 	}
 
@@ -143,21 +137,6 @@ public class Nota {
 		if (!(obj instanceof Nota))
 			return false;
 		Nota other = (Nota) obj;
-		if (cor == null) {
-			if (other.cor != null)
-				return false;
-		} else if (!cor.equals(other.cor))
-			return false;
-		if (deNota == null) {
-			if (other.deNota != null)
-				return false;
-		} else if (!deNota.equals(other.deNota))
-			return false;
-		if (dtAltNota == null) {
-			if (other.dtAltNota != null)
-				return false;
-		} else if (!dtAltNota.equals(other.dtAltNota))
-			return false;
 		if (dtCriNota == null) {
 			if (other.dtCriNota != null)
 				return false;
@@ -167,18 +146,6 @@ public class Nota {
 			if (other.idNota != null)
 				return false;
 		} else if (!idNota.equals(other.idNota))
-			return false;
-		if (!Arrays.equals(imagem, other.imagem))
-			return false;
-		if (listaGrupos == null) {
-			if (other.listaGrupos != null)
-				return false;
-		} else if (!listaGrupos.equals(other.listaGrupos))
-			return false;
-		if (tlNota == null) {
-			if (other.tlNota != null)
-				return false;
-		} else if (!tlNota.equals(other.tlNota))
 			return false;
 		return true;
 	}

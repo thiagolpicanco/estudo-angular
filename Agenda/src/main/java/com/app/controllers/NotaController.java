@@ -3,6 +3,7 @@ package com.app.controllers;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,14 +65,8 @@ public class NotaController {
 		if (null != nota.getIdNota() && notaService.notaExistente(nota.getIdNota())) {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
-		if (null != nota.getListaGrupos() && !nota.getListaGrupos().isEmpty()) {
-			for (Grupo grupo : nota.getListaGrupos()) {
-				if (grupoService.grupoExistente(grupo.getIdGrupo())) {
-					grupo.setListaNotas(new ArrayList<Nota>());
-					grupo.getListaNotas().add(nota);
-				}
-			}
-		}
+		
+		mapearGrupoReverso(nota);
 
 		if (null == nota.getCor()) {
 			nota.setCor("white");
@@ -88,25 +83,18 @@ public class NotaController {
 
 	@RequestMapping(value = "/editarNota/", method = RequestMethod.PUT)
 	public ResponseEntity<Void> editNota(@RequestBody Nota nota, UriComponentsBuilder ucBuilder) {
-
 		if (null == nota.getIdNota() && !notaService.notaExistente(nota.getIdNota())) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
-		if (null != nota.getListaGrupos() && !nota.getListaGrupos().isEmpty()) {
-			for (Grupo grupo : nota.getListaGrupos()) {
-				if (grupoService.grupoExistente(grupo.getIdGrupo())) {
-					grupo.getListaNotas().add(nota);
-				}
-			}
-		}
+		mapearGrupoReverso(nota);
 
 		nota.setDtAltNota(new Date());
 
 		notaService.salvarNota(nota);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/nota/{id}").buildAndExpand(nota.getIdNota()).toUri());
+		headers.setLocation(ucBuilder.path("/nota/{id}") .buildAndExpand(nota.getIdNota()).toUri());
 		return new ResponseEntity<>(headers, HttpStatus.ACCEPTED);
 	}
 
@@ -121,4 +109,24 @@ public class NotaController {
 		headers.setLocation(ucBuilder.path("/nota/{id}").buildAndExpand(notaId).toUri());
 		return new ResponseEntity<>(headers, HttpStatus.ACCEPTED);
 	}
+
+	private void mapearGrupoReverso(Nota nota) {
+		if (null != nota.getListaGrupos() && !nota.getListaGrupos().isEmpty()) {
+
+			Grupo grupoAux;
+			HashSet<Nota> hnotas;
+			List<Nota> notas;
+
+			for (Grupo grupo : nota.getListaGrupos()) {
+				if (grupoService.grupoExistente(grupo.getIdGrupo())) {
+					grupoAux = grupoService.buscaPorId(grupo.getIdGrupo());
+					hnotas = new HashSet<>(grupoAux.getListaNotas());
+					hnotas.add(nota);
+					notas = new ArrayList<>(hnotas);
+					grupo.setListaNotas(notas);
+				}
+			}
+		}
+	}
+
 }

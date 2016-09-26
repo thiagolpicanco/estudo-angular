@@ -75,11 +75,8 @@ public class Grupo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dtAltGrupo == null) ? 0 : dtAltGrupo.hashCode());
 		result = prime * result + ((dtCriGrupo == null) ? 0 : dtCriGrupo.hashCode());
 		result = prime * result + ((idGrupo == null) ? 0 : idGrupo.hashCode());
-		result = prime * result + ((listaNotas == null) ? 0 : listaNotas.hashCode());
-		result = prime * result + ((noGrupo == null) ? 0 : noGrupo.hashCode());
 		return result;
 	}
 
@@ -92,11 +89,6 @@ public class Grupo {
 		if (!(obj instanceof Grupo))
 			return false;
 		Grupo other = (Grupo) obj;
-		if (dtAltGrupo == null) {
-			if (other.dtAltGrupo != null)
-				return false;
-		} else if (!dtAltGrupo.equals(other.dtAltGrupo))
-			return false;
 		if (dtCriGrupo == null) {
 			if (other.dtCriGrupo != null)
 				return false;
@@ -106,16 +98,6 @@ public class Grupo {
 			if (other.idGrupo != null)
 				return false;
 		} else if (!idGrupo.equals(other.idGrupo))
-			return false;
-		if (listaNotas == null) {
-			if (other.listaNotas != null)
-				return false;
-		} else if (!listaNotas.equals(other.listaNotas))
-			return false;
-		if (noGrupo == null) {
-			if (other.noGrupo != null)
-				return false;
-		} else if (!noGrupo.equals(other.noGrupo))
 			return false;
 		return true;
 	}

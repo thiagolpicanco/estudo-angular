@@ -260,9 +260,14 @@ body, html {
 }
 
 .nota-concluir {
-	text-align: center;
-	cursor: pointer;
+	display: block;
+	width: 100%;
+	border: none;
 	border-radius: 5px;
+}
+
+button[disabled='disabled'] {
+	background-color: gray !important;
 }
 
 #minhas-notas .container {
@@ -270,12 +275,8 @@ body, html {
 	width: 100%;
 }
 
-#inputCriarNotaTitulo {
+#inputCriarNotaTitulo, #inputCriarBody {
 	color: #c3c3c3;
-}
-
-#criar-nota-group {
-	display: none;
 }
 
 .nota-menu {
@@ -298,7 +299,6 @@ body, html {
 	position: absolute;
 	z-index: 1;
 	background: white;
-	left: 0;
 }
 
 .btn-grupo {
@@ -321,10 +321,8 @@ body, html {
 }
 
 #listagem-nota {
-	overflow: auto;
 	margin: 0;
 	padding: 0;
-	max-height: 410px;
 }
 
 #menu-lateral {
@@ -391,4 +389,16 @@ body, html {
 	height: 10px;
 	background-color: white;
 	border: 1px solid black;
+}
+
+#criar-nota-modal {
+	color: #c3c3c3;
+}
+
+.modal-footer {
+	text-align: initial;
+}
+
+.fa-trash {
+	float: right;
 }
