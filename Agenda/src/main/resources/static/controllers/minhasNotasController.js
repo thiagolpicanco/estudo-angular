@@ -28,7 +28,7 @@ agenda.controller('minhasNotasController', function(NOTA, $scope, $rootScope, $h
 		$scope.activePaletaNota = null;
 		return $(obj).css('background-color');
 	}
-
+ 
 	$scope.novaCor = function($event) {
 		$scope.nota.cor = $scope.alteraCor(event);
 	}
