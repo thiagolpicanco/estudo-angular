@@ -2,7 +2,7 @@
 
 
 
-Agenda foi um mini-sistema criado para testes
+Agenda foi um mini-sistema criado para testes com API do google
 
 Funcionalidade:
   - Criar Contatos
