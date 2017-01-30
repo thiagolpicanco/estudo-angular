@@ -2,7 +2,7 @@
 
 
 
-Agenda foi um mini-sistema criado para testes nos frameworks SpringBoot e Angular.
+Agenda foi um mini-sistema criado para testes
 
 Funcionalidade:
   - Criar Contatos
